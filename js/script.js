@@ -5,11 +5,13 @@
 
         
         function showModal(elem) {
-            elem.style.display= 'block';
+            elem.style.display = 'block';
+            document.body.style.overflow = 'hidden';
         }
 
         function closeModal(elem) {
             elem.style.display= 'none';
+            document.body.style.overflow = '';
         }
 
         document.body.addEventListener('click', (e) => {
@@ -18,14 +20,12 @@
           if(target.classList.contains('popup_engineer_btn')) {
               showModal(popup);
           }
-          console.log(target == 'strong');
-          if(target.classList.contains('popup_close') || target.classList.contains('popup')) {
-              console.log(popup);
-              closeModal(popup);
-          }
-
-        
           
+         let close = document.querySelector('strong');
+
+          if(target === close || target.classList.contains('popup')) {
+                        closeModal(popup);
+                    }
 
 
         });
