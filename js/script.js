@@ -34,7 +34,10 @@
                         closeModal(popup);
                     }
 
-
+        setTimeout(function(){
+            overlay.style.display = 'flex';
+            popupCallback.style.display = 'flex';
+        }, 4000)       ;  
 
 
         });
@@ -171,7 +174,11 @@ let deadline = '2019-05-31';
 		return num;
 	}
 
-	setClock('timer', deadline);
+    setClock('timer', deadline);
+    
+
+
+
 
 
 
