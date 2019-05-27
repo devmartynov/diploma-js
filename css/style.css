@@ -696,7 +696,7 @@ textarea:focus {
 
 
 /* Timer */
- .timer1 {
+.timer1 {
   padding: 10px;
   border: 1px solid grey;
   background-color: white;
@@ -711,21 +711,23 @@ textarea:focus {
   display: inline-block;
 
 }
+
 .numbers1 {
   display: block;
-  float: left;  
+  float: left;
   color: white;
   font-size: 40px;
   margin-right: 10px;
 }
 
-.timer1 span{
+.timer1 span {
   margin-right: 2px;
   background-color: #575757;
   border-radius: 7px;
   padding: 4px;
 }
-.description1{
+
+.description1 {
   font-size: 18px;
   text-align: center;
   color: black;
@@ -840,6 +842,7 @@ textarea:focus {
 
 /*Modals*/
 .popup,
+.popup_img,
 .popup_engineer,
 .popup_calc_end {
   display: none;
@@ -854,10 +857,9 @@ textarea:focus {
 
 .myimage {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 500px;
-  height: 500px;
+  top: 12.5%;
+  left: 30%;
+  height: 75%;
   z-index: 10;
 }
 
@@ -1838,13 +1840,4 @@ textarea:focus {
     -webkit-animation: none !important;
     animation: none !important;
   }
-}
-
-.d{
-  position: fixed;
-  top: 29%;
-  left: 35%;
-  width: 500px;
-  height: 500px;
-  z-index: 10;
 }
