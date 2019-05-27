@@ -1839,3 +1839,12 @@ textarea:focus {
     animation: none !important;
   }
 }
+
+.d{
+  position: fixed;
+  top: 29%;
+  left: 35%;
+  width: 500px;
+  height: 500px;
+  z-index: 10;
+}

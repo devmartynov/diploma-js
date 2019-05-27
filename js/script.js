@@ -34,10 +34,10 @@
                         closeModal(popup);
                     }
 
-        setTimeout(function(){
-            overlay.style.display = 'flex';
-            popupCallback.style.display = 'flex';
-        }, 4000)       ;  
+        // setTimeout(function(){
+        //     overlay.style.display = 'flex';
+        //     popupCallback.style.display = 'flex';
+        // }, 4000);  
 
 
         });
@@ -51,65 +51,67 @@
 
 //   console.log('main_form');
 
-function sendForm(elem) {
-    let input = document.getElementsByTagName('.form_input'),
-    statusMessage = document.createElement('div');
-    statusMessage.classList.add('status');
+let message = {
+    loading: "Загрузка",
+    success: "Спасибо! Скоро мы с Вами свзяжемся!",
+    failure: "Что-то пошло не так!"
+};
 
-    let message = {
-        loading: 'Идет отправка',
-        success: 'Отправлено!',
-        failure: 'Ошибка...'
-    };
+let forms = document.querySelectorAll("form"),
+    inputs = document.querySelectorAll(".form input"),
+    statusMessage = document.createElement("div"),
+    allInputsUserPhone = document.querySelectorAll("input[name='user_phone']");
 
-    elem.addEventListener('submit', function(e) {
-        e.preventDefault();
-        elem.appendChild(statusMessage);
-        let formData = new FormData(elem);
+function setValidation(elem) {
+    for (let i = 0; i < elem.length; i++) {
+        elem[i].addEventListener("input", () => {
+            elem[i].value = elem[i].value.replace(/[^0-9]/ig, "");
+        });
+    }
+}
+setValidation(allInputsUserPhone);
 
-        function postData() {
-            return new Promise(function(resole,reject) {
-                let request = new XMLHttpRequest();
-                request.open('POST', 'server.php');
-                request.setRequestHeader('Content-type', 'application/json; charset=utf-8');
+statusMessage.classList.add("status");
 
-                request.addEventListener('readystatechange', () => {
-                    if (request.readyState < 4 ) {
-                        resolve();
-                    } else if (request.readyState === 4 && request.status == 200) {
-                        resolve();
-                    } else {
-                        reject();
-                    }
+function sendform(ourForm, ourInputs) {
+    for (let f = 0; f < ourForm.length; f++) {
+        let form = ourForm[f];
+
+        form.addEventListener("submit", (event) => {
+            event.preventDefault();
+            form.appendChild(statusMessage);
+
+            let request = new XMLHttpRequest();
+                request.open("POST", "server.php");
+                request.setRequestHeader("Content-Type", "application/json; charset=utf-8");
+
+                let formData = new FormData(form);
+                let obj = {};
+                formData.forEach(function (value, key) {
+                    obj[key] = value;
                 });
 
-    request.send(formData);
+                let json = JSON.stringify(obj);
+                request.send(json);
 
-            });
-        }
-        function clearInput() {
-            for(let i = 0; i < input.length; i++) {
-                input[i].value = '';
-            }
-        }
-    
-			postData(formData)
-            .then(() => statusMessage.innerHTML = message.loading)
-            .then(() => statusMessage.innerHTML = message.success)
-            .catch(() => statusMessage.innerHTML = message.failure)
-            .then(clearInput);
+                request.addEventListener("readystatechange", () => {
+                    if (request.readyState < 4) {
+                        statusMessage.innerHTML = message.loading;
+                    } else if (request.readyState === 4 && request.status == 200) {
+                        statusMessage.innerHTML = message.success;
+                    } else {
+                        statusMessage.innerHTML = message.failure;
+                    }
+                });
+                for (let i = 0; i < ourInputs.length; i++) {
+                    ourInputs[i].value = "";
+                }
+            }); // конец обработчика событий
 
-    });
-}
+        } // конец цикла for f
+    }
 
-sendForm(form);
-
-let inputPhone = document.querySelectorAll('input[type="tel"]');
-for(let i = 0; i < inputPhone.length; i++){
-    inputPhone[i].addEventListener('inрut', function() {
-    inputPhone[i].value = inputPhone[i].value.replace(/[^+\d]/g, '');
-    });
-}
+    sendform(forms, inputs);
 
 
 // В ПРОЦЕССЕ, запушила для себя пока
@@ -117,7 +119,7 @@ for(let i = 0; i < inputPhone.length; i++){
 
 
 // timer
-let deadline = '2019-05-31';
+let deadline = '2019-05-30';
 
 	function getTimeRemaining(endtime) {
 		let t = Date.parse(endtime) - Date.parse(new Date()),
@@ -140,18 +142,18 @@ let deadline = '2019-05-31';
 	function setClock(id, endtime) {
 		let timer = document.getElementById(id),
 			days = timer.querySelector('#days'),
-			hours = timer.querySelector('.hours'),
+			hours = timer.querySelector('#hours'),
 			minutes = timer.querySelector('#minutes'),
 			seconds = timer.querySelector('#seconds'),
 			timeInterval = setInterval(updateClock, 1000);
 
-
+        // console.log(minutes);
 
 		function updateClock() {
 			let t = getTimeRemaining(endtime);
 			days.textContent = formatDate(t.days);
 			hours.textContent = formatDate(t.hours);
-			minutes.textContent = formatDate(t.minutes);
+            minutes.textContent = formatDate(t.minutes);
 			seconds.textContent = formatDate(t.seconds);
 
 
@@ -175,6 +177,37 @@ let deadline = '2019-05-31';
 	}
 
     setClock('timer', deadline);
+
+
+    // image - zoom
+
+    let images = document.querySelectorAll(".works img.pa");
+    let overlay = document.querySelector(".overlay");
+
+for (let i = 0; i < images.length; i++) {
+    let actual = images[i],
+        div = document.createElement("div"),
+        img = document.createElement("img");
+    img.setAttribute("src", images[i].getAttribute("src"));
+
+    actual.addEventListener("click", (event) => {
+        event.preventDefault();
+        overlay.style.display = "block";
+        overlay.appendChild(div).appendChild(img);
+        img.classList.add("d");
+        document.body.style.overflow = "hidden";
+    });
+}
+
+window.addEventListener("click", (event) => {
+    if (event.target === overlay) {
+        overlay.style.display = "none";
+        document.body.style.overflow = "";
+    }
+});
+    
+    
+
     
 
 
