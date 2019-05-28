@@ -240,6 +240,8 @@ menuGlaz.addEventListener('click', function (event) {
         div = document.createElement('div'),
         bigImage = document.createElement('img'),
         ol = document.querySelector('.overlay');
+        
+
 
     for (let i = 0; i < links.length; i++) {
       links[i].addEventListener('click', (event) => {
@@ -249,6 +251,7 @@ menuGlaz.addEventListener('click', function (event) {
         bigImage.classList.add('myimage');
         div.appendChild(bigImage);
         cont.appendChild(div);
+        document.body.style.overflow = "hidden";
         ol.style.display = 'block';
         div.style.display = 'block';
       });
