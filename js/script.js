@@ -232,33 +232,35 @@ menuGlaz.addEventListener('click', function (event) {
         });
     });
 
-    // image-works
+    // image-works  - полностью переписала
 
     let works = document.querySelector('.works'),
-        container = works.getElementsByTagName('img'),
+        links = works.getElementsByTagName('a'),
+        cont = works.getElementsByClassName('container')[0],
         div = document.createElement('div'),
-        bigWorks = document.createElement('img');
+        bigImage = document.createElement('img'),
+        ol = document.querySelector('.overlay');
 
-    works.addEventListener('click', function (event) {
+    for (let i = 0; i < links.length; i++) {
+      links[i].addEventListener('click', (event) => {
         event.preventDefault();
-        for (let i = 0; i < container.length; i++) {
-            if (event.target == container[i]) {
+        div.classList.add('popup_img');
+        bigImage.src = links[i].getAttribute('href');
+        bigImage.classList.add('myimage');
+        div.appendChild(bigImage);
+        cont.appendChild(div);
+        ol.style.display = 'block';
+        div.style.display = 'block';
+      });
+    }
 
-                div.classList.add('popup_img');
-                bigWorks.src = works.getElementsByTagName('a')[i];
-                bigWorks.classList.add('myimage');
-                div.appendChild(bigWorks);
-                works.appendChild(div);
-                div.style.display = 'block';
-            }
-        }
+    div.addEventListener('click', (event) => {
+      if (event.target != bigImage) {
+        ol.style.display = 'none';
+        div.style.display = 'none';
+      }  
     });
 
-    div.addEventListener('click', function (event) {
-        if (event.target == div) {
-            div.style.display = 'none';
-        }
-    });
 
     //  calculator
 
@@ -407,17 +409,5 @@ menuGlaz.addEventListener('click', function (event) {
 
     // не всё работает, завтра еще буду проверять
     
-
-
-
-
-
-
-       
-
-
-
-
-
 
 
