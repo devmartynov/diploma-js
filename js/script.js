@@ -299,7 +299,7 @@ menuGlaz.addEventListener('click', function (event) {
 
             let chr = getChar(e);
 
-            if (chr >= '0' && chr <= '9' || chr == '+') {
+            if (chr >= '0' && chr <= '9') {
                 return true;
             } else {
                 return false;
