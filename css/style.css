@@ -6,6 +6,10 @@ html {
   font-size: 10px;
 }
 
+.decoration_item.wow.fadeInUp.slick-slide.slick-active {
+  outline: none;
+}
+
 body {
   font-family: 'Open Sans', sans-serif;
   font-weight: 400;

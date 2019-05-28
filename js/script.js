@@ -213,9 +213,12 @@ menuGlaz.addEventListener('click', function (event) {
         mass = [internal, external, rising, roof];
 
     menu.addEventListener('click', function (event) {
+       
         tab.forEach(function (item) {
+            console.log(item.children);
+            
 
-            if (event.target == item || event.target == item.children[0]) {
+            if (event.target == item || event.target == item.children[0] || event.target.classList == 'decoration_item') {
 
                 tab.forEach(function (item) {
                     item.classList.remove('after_click');
@@ -261,6 +264,7 @@ menuGlaz.addEventListener('click', function (event) {
       if (event.target != bigImage) {
         ol.style.display = 'none';
         div.style.display = 'none';
+        document.body.style.overflow = "auto";
       }  
     });
 
