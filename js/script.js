@@ -105,11 +105,8 @@ form.forEach(function (item) {
 
             let chr = getChar(e);
 
-            if (chr >= '0' && chr <= '9' || chr == '+') {
-                return true;
-            } else {
-                return false;
-            }
+
+            return(chr >= '0' && chr <= '9');
 
         };
     }
