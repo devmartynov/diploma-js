@@ -411,7 +411,6 @@ menuGlaz.addEventListener('click', function (event) {
 
 
 
-    // не всё работает, завтра еще буду проверять
-    
+ 
 
 
