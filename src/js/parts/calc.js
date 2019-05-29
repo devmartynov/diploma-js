@@ -36,11 +36,7 @@ function calc() {
 
             let chr = getChar(e);
 
-            if (chr >= '0' && chr <= '9') {
-                return true;
-            } else {
-                return false;
-            }
+            return(chr >= '0' && chr <= '9');
 
         };
     }
